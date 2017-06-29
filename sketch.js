@@ -107,7 +107,7 @@ function draw(){
   blend(wrigglies, 0, 0, wrigglies.width, wrigglies.height, 0, 0, widthMultiplier*rectWidth, heightMultiplier*rectHeight, DARKEST)
   pop();
 
-  blend(wrigglies2, 0, 0, wrigglies2.width, wrigglies2.height, 0, 0, windowWidth, windowHeight, SOFT_LIGHT);
+  blend(wrigglies2, 0, 0, wrigglies2.width, wrigglies2.height, 0, 0, windowWidth, windowHeight, OVERLAY);
   tint(redColor, 0, blueColor);
   
 }
