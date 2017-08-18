@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/tracking-min.js"></script>
+    <script src="js/face-min.js"></script>
+    <style> 
+      body {padding: 0; margin: 0; background-color: black;} 
+      video, canvas {
+        margin-left: 0px;
+        margin-top: 0px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <video id="webcam" width="640" height="480" preload autoplay loop muted></video>
+      <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+  </body>
+  <script src="higuchi-yuko.js"></script>
+</html>
