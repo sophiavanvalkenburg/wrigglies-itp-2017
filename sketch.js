@@ -58,7 +58,6 @@ function preload(){
   wrigglies2.loop();
   wrigglies2.hide();
   wrigglies2.speed(0.5);
-
 }
 
 function setup(){
