@@ -14,6 +14,8 @@ var musicDuration;
 var widthMultiplier;
 var heightMultiplier;
 
+var started = false;
+
 window.onload = function(){
 
   var tracker = new tracking.ObjectTracker('face');
@@ -51,11 +53,9 @@ function preload(){
   music = loadSound("static/brinn.mp3");
 
   wrigglies = createVideo(['static/wrigglies3.mp4'])
-  wrigglies.loop();
   wrigglies.hide();
 
   wrigglies2 = createVideo(['static/wrigglies2.mp4'])
-  wrigglies2.loop();
   wrigglies2.hide();
   wrigglies2.speed(0.5);
 }
@@ -73,18 +73,19 @@ function setup(){
 
   amplitude = new p5.Amplitude();
 
-  music.play();
-  music.loop();
+  getAudioContext().suspend();
   
 }
 
-function draw(){
+function drawWrigglies() {
   var ampLevel = amplitude.getLevel();
 
   var redColor = map(ampLevel, 0, 1, 100, 255);
   var blueColor = map(ampLevel, 0, 1, 255, 100);
 
   background(255);
+  image(wrigglies, 0, 0, windowWidth, windowHeight);
+  image(wrigglies2, 0, 0, windowWidth, windowHeight);
   image(capture, 0, 0, windowWidth, windowHeight);
 
   var wriggliesSize;
@@ -105,8 +106,28 @@ function draw(){
   scale(wriggliesSize, wriggliesSize);
   blend(wrigglies, 0, 0, wrigglies.width, wrigglies.height, 0, 0, widthMultiplier*rectWidth, heightMultiplier*rectHeight, DARKEST)
   pop();
-
   blend(wrigglies2, 0, 0, wrigglies2.width, wrigglies2.height, 0, 0, windowWidth, windowHeight, OVERLAY);
   tint(redColor, 0, blueColor);
+}
+
+function draw(){
+  if (started) {
+    drawWrigglies();
+  } else {
+    background(color(60, 22, 125));
+    textAlign(CENTER, CENTER);
+    textSize(48);
+    fill(255);
+    text('Press Anywhere To Continue...', windowWidth/2, windowHeight/2);
+  }
   
+}
+
+function mouseClicked() {
+  userStartAudio();
+  started = true;
+  clear();
+  music.loop();
+  wrigglies.loop();
+  wrigglies2.loop();
 }
